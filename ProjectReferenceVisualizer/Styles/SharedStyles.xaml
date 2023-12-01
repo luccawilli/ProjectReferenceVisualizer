@@ -1,0 +1,101 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="MainBackgroundBrush" Color="#F6F8FA" />
+    <SolidColorBrush x:Key="PrimaryViloet" Color="#7C00E8" />
+    <SolidColorBrush x:Key="PrimaryViloetLight" Color="#6E00CF" />
+    <SolidColorBrush x:Key="PrimaryBlue" Color="#579BD3" />
+    <SolidColorBrush x:Key="SecondaryGray" Color="#E6E6E6" />
+
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="0,2,0,0" />
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="4" />
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="BorderThickness" Value="1" />
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="3" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="{x:Type RadioButton}">
+        <Setter Property="BorderThickness" Value="1" />
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="3" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="Titles">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="10,10,10,0"/>
+    </Style>
+
+    <Style TargetType="{x:Type ContentControl}" x:Key="MaterialGroup">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect 
+                    BlurRadius="5" 
+                    ShadowDepth="1" 
+                    Direction="270" 
+                    Opacity="0.42" 
+                    RenderingBias="Performance" 
+                    Color="#AA000000" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Border BorderThickness="1,1,1,1"
+                            CornerRadius="4" 
+                            Background="White" >
+                        <ContentPresenter Content="{TemplateBinding Content}" Margin="4"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin">
+            <Setter.Value>10</Setter.Value>
+        </Setter>
+        <Setter Property="Padding">
+            <Setter.Value>16</Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PillsTabItem" TargetType="{x:Type TabItem}">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border" BorderThickness="0" CornerRadius="4" Background="White" Margin="5,0,5,5" Padding="5">
+                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        ContentSource="Header"
+                                        Margin="10,2" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MainBackgroundBrush}" />
+                            <Setter Property="FontWeight" Value="Medium" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

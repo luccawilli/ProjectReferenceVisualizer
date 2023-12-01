@@ -1,0 +1,214 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="SharedStyles.xaml"/>
+        <ResourceDictionary Source="Icons.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="{x:Type Button}" x:Key="SecondaryButton">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="OuterBorder" CornerRadius="3"
+                        BorderThickness="2" BorderBrush="Transparent" Padding="1">
+                        <Border CornerRadius="4,4,4,4"
+                        BorderThickness="1" BorderBrush="LightGray" Background="{TemplateBinding Background}" Padding="6">
+                            <ContentPresenter x:Name="contentPresenter" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#6E00CF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#E6E6E6"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="TransparentButton">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter x:Name="contentPresenter" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.9"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="AddButtonWithIcon">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="OuterBorder" CornerRadius="3"
+                        BorderThickness="2" BorderBrush="Transparent" Padding="1">
+                        <Border CornerRadius="4"
+                        BorderThickness="1" BorderBrush="LightGray" Background="{TemplateBinding Background}" Padding="6">
+                            <DockPanel>
+                                <Image Source="{StaticResource AddDrawingImage}" Width="15" Margin="5,0,0,0" />
+                                <ContentPresenter x:Name="contentPresenter" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </DockPanel>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#6E00CF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#E6E6E6" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="CopyButtonWithIcon">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="OuterBorder" CornerRadius="3"
+                        BorderThickness="2" BorderBrush="Transparent" Padding="1">
+                        <Border CornerRadius="4"
+                        BorderThickness="1" BorderBrush="LightGray" Background="{TemplateBinding Background}" Padding="6">
+                            <DockPanel>
+                                <Image Source="{StaticResource CopyDrawingImage}" Width="15" Margin="5,0,0,0" />
+                                <ContentPresenter x:Name="contentPresenter" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </DockPanel>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#6E00CF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#E6E6E6" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type Button}" x:Key="SaveButtonWithIcon">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="OuterBorder" CornerRadius="3"
+                        BorderThickness="2" BorderBrush="Transparent" Padding="1">
+                        <Border CornerRadius="4"
+                        BorderThickness="1" BorderBrush="LightGray" Background="{TemplateBinding Background}" Padding="6">
+                            <DockPanel>
+                                <Image Source="{StaticResource SaveDrawingImage}" Width="15" Margin="5,0,0,0" />
+                                <ContentPresenter x:Name="contentPresenter" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </DockPanel>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#6E00CF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#E6E6E6" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type Button}" x:Key="PrimaryButtonWithIcon">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Background" Value="#7C00E8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="OuterBorder" CornerRadius="3"
+                        BorderThickness="2" BorderBrush="Transparent" Padding="1">
+                        <Border CornerRadius="4"
+                        BorderThickness="1" BorderBrush="LightGray" Background="{TemplateBinding Background}" Padding="6">
+                            <DockPanel>
+                                <Image Source="{StaticResource StartDrawingImage}" Width="15" Margin="5,0,0,0" />
+                                <ContentPresenter x:Name="contentPresenter" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                      Content="{TemplateBinding Content}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </DockPanel>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#6E00CF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#6E00CF" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
