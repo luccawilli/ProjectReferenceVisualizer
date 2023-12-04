@@ -39,7 +39,7 @@
         </DockPanel>
         <ContentControl Grid.Row="2" Style="{StaticResource MaterialGroup}">
             <DockPanel>
-                <Label Margin="5,10,5,0" DockPanel.Dock="Top">Ordner</Label>
+                <Label Margin="5,10,5,0" DockPanel.Dock="Top">Repository Ordner</Label>
                 <DockPanel DockPanel.Dock="Top" Margin="10,5,10,0" >
                     <Button DockPanel.Dock="Right" Style="{StaticResource TransparentButton}" Margin="5,0,0,0" VerticalAlignment="Top" Height="25" Width="30" ToolTip="Ordner wählen" Command="{Binding OpenFolderCommand}" >
                         <Image Source="{StaticResource FolderDrawingImage}" Width="15"></Image>
@@ -47,9 +47,9 @@
                     <TextBox DockPanel.Dock="Left" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25"                         
                          Text="{Binding FolderPath, Mode=TwoWay}"/>
                 </DockPanel>
-                
-                <Label DockPanel.Dock="Top" Margin="5,10,5,5" ToolTip="Komma separiert, Bsp.: Name1, Name2">Exkludierte Projektnamen</Label>
-                <TextBox DockPanel.Dock="Top" x:Name="ExcludedProjectNames" TextWrapping="Wrap" Text="{Binding ExcludedProjects, Mode=TwoWay}" Margin="10,5,10,0" ToolTip="Komma separiert, Bsp.: Name1, Name2"/>
+
+                <Label DockPanel.Dock="Top" Margin="5,10,5,5" ToolTip="Das Projekten dessen Referenzen (mit transitiven) angezeigt werden soll.">Namen des zu visualisierenden Projektes</Label>
+                <TextBox DockPanel.Dock="Top" x:Name="InculdedProjectName" TextWrapping="Wrap" Height="25" Text="{Binding InculdedProject, Mode=TwoWay}" Margin="10,5,10,0" ToolTip="Das Projekten dessen Referenzen (mit transitiven) angezeigt werden soll."/>
 
                 <Label DockPanel.Dock="Top" Margin="5,10,5,5" >Ausgabe</Label>
                 <TextBox x:Name="ResultView" TextWrapping="Wrap" Text="{Binding ResultText}" Margin="10,5,10,10" IsReadOnly="True" IsReadOnlyCaretVisible="True" />

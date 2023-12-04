@@ -12,11 +12,10 @@ namespace ProjectReferenceVisualizer {
 
     #region Properties
 
-
-    private string _excludedProjects = string.Empty;
-    public string ExcludedProjects {
-      get => _excludedProjects;
-      set => SetProperty(ref _excludedProjects, value);
+    private string _inculdedProject = string.Empty;
+    public string InculdedProject {
+      get => _inculdedProject;
+      set => SetProperty(ref _inculdedProject, value);
     }
 
     private string _folderPath = string.Empty;
@@ -75,27 +74,22 @@ namespace ProjectReferenceVisualizer {
     /// <summary>Start</summary>
     private void Start() {
       string folderPath = FolderPath;
-      string excludedProjects = ExcludedProjects;
+      string includedProject = InculdedProject;
       bool exists = Directory.Exists(folderPath);
       if (!exists) {
+        ResultText = "Ordner exisitert nicht.";
         return;
-      }
-      HashSet<string> excludedProjectNames = new HashSet<string>();
-      if (!string.IsNullOrWhiteSpace(excludedProjects)) {
-        excludedProjectNames = excludedProjects.Split(",").ToHashSet();
       }
 
       const string projectEnding = ".csproj";
       Regex projectRefRegex = new Regex("[ ]*<ProjectReference[ ]*Include=\"[.\\a-zA-Z0-9]*\"[ ]*\\/>{1}");
       Regex inculdeRegex = new Regex("\"[.\\a-zA-Z0-9]*\"");
-      StringBuilder sb = new StringBuilder();
       var allProjectFiles = Directory.EnumerateFiles(folderPath, $"*{projectEnding}", SearchOption.AllDirectories);
+
+      Dictionary<string, List<string>> references = new Dictionary<string, List<string>>();
       foreach (var file in allProjectFiles) {
         FileInfo fileInfo = new FileInfo(file);
         if (!fileInfo.Exists) {
-          continue;
-        }
-        if (excludedProjectNames.Contains(fileInfo.Name)) {
           continue;
         }
         var fileContent = File.ReadAllText(file);
@@ -110,20 +104,30 @@ namespace ProjectReferenceVisualizer {
             if (string.IsNullOrEmpty(referencingProjectName)) {
               continue;
             }
-            if (excludedProjectNames.Contains(referencingProjectName)) {
-              continue;
+
+            string mappingString = fileInfo.Name?.Replace($"{projectEnding}", "") ?? "";
+            if (!references.ContainsKey(mappingString)) {
+              references[mappingString] = new List<string>();
             }
-            sb.AppendLine(GetMappingString(fileInfo.Name?.Replace($"{projectEnding}", "") ?? "", referencingProjectName));
-          }
-          
+            references[mappingString].Add(referencingProjectName);
+          }          
         }
+      }
+
+      StringBuilder sb = new StringBuilder();
+      if (references.ContainsKey(includedProject)) {
+        var refs = references[includedProject];
+        List<Tuple<string, string>> transitiveRef = new List<Tuple<string, string>>();
+        GetTransitiveRefernces(refs, references, transitiveRef);
+        refs.ForEach(x => sb.AppendLine(GetMappingString(includedProject, x)));
+        transitiveRef.Distinct().ToList().ForEach(x => sb.AppendLine(GetMappingString(x.Item1, x.Item2)));
       }
       ResultText = sb.ToString();
     }
 
     /// <summary>Clear</summary>
     private void Clear() {
-      ExcludedProjects = "";
+      InculdedProject = "";
       FolderPath = "";
       ResultText = "";
     }
@@ -138,6 +142,16 @@ namespace ProjectReferenceVisualizer {
 
     private string GetMappingString(string projectName, string referencingProjectName) {
       return $"[{projectName}] -> [{referencingProjectName}]";
+    }
+
+    private void GetTransitiveRefernces(List<string> transitiveRefs, Dictionary<string, List<string>> references, List<Tuple<string, string>> result) {
+      foreach (string transitiveRef in transitiveRefs) {
+        if (!references.ContainsKey(transitiveRef)) {
+          continue;
+        }
+        references[transitiveRef].ForEach(x => result.Add(new Tuple<string, string>(transitiveRef, x)));
+        GetTransitiveRefernces(references[transitiveRef], references, result);
+      }
     }
 
   }
