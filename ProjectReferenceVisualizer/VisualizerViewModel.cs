@@ -10,6 +10,16 @@ using System.Windows.Input;
 namespace ProjectReferenceVisualizer {
   public class VisualizerViewModel : Binding.BindableBase {
 
+    private static String envVariable = "ProjectReferenceVisualizer";
+
+    public VisualizerViewModel() {
+
+      String? folder = Environment.GetEnvironmentVariable(envVariable, EnvironmentVariableTarget.User);
+      if (!String.IsNullOrEmpty(folder)) {
+        FolderPath = folder;
+      }
+    }
+
     #region Properties
 
     private string _inculdedProject = string.Empty;
@@ -132,11 +142,12 @@ namespace ProjectReferenceVisualizer {
       ResultText = "";
     }
 
-    private void OpenFolder() {
+    private async Task OpenFolder() {
       System.Windows.Forms.FolderBrowserDialog folderDlg = new System.Windows.Forms.FolderBrowserDialog();
       folderDlg.SelectedPath = FolderPath;
       if (folderDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
         FolderPath = folderDlg.SelectedPath;
+        await Task.Run(() => Environment.SetEnvironmentVariable(envVariable, FolderPath, EnvironmentVariableTarget.User));
       }
     }
 
